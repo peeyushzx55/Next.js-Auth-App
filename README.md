@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Full Stack User Authentication App
+
+A modern, secure user authentication application built with Next.js 15, featuring email verification, JWT-based authentication, and MongoDB integration.
+
+## Features
+
+- 🔐 Secure user authentication
+- ✉️ Email verification system
+- 🎯 JWT (JSON Web Token) based authorization
+- 👤 User profile management
+- 🔒 Password hashing with bcrypt
+- 🎨 Responsive UI with Tailwind CSS
+- 📱 TypeScript support for better type safety
+
+## Tech Stack
+
+- **Frontend:**
+
+  - Next.js 15.5.2
+  - React 19.1.0
+  - TypeScript
+  - Tailwind CSS
+  - React Hot Toast for notifications
+
+- **Backend:**
+  - Next.js API Routes
+  - MongoDB with Mongoose
+  - JWT for authentication
+  - Nodemailer for email services
+  - Bcrypt for password hashing
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- Node.js (Latest LTS version recommended)
+- MongoDB (Local installation or MongoDB Atlas account)
+- Git
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+   ```bash
+   git clone https://github.com/peeyushzx55/Next.js-Auth-App.git
+   cd full-stack-user-auth-app
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Set up environment variables:
+   Create a `.env` file in the root directory with the following variables:
+
+   ```env
+   MONGODB_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret_key
+   EMAIL_HOST=your_email_smtp_host
+   EMAIL_USER=your_email_username
+   EMAIL_PASS=your_email_password
+   ```
+
+4. Run the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
+
+## Project Structure
+
+```
+src/
+├── app/               # Next.js app directory
+│   ├── api/          # API routes
+│   ├── login/        # Login page
+│   ├── profile/      # User profile pages
+│   └── signup/       # Signup page
+├── db/               # Database configuration
+├── helpers/          # Helper utilities
+├── models/           # MongoDB models
+└── templates/        # Email templates
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Development Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Turbopack Integration:** Utilizing Next.js with Turbopack for faster development experience
+- **ESLint Configuration:** Comprehensive linting setup for code quality
+- **TypeScript Support:** Full type checking and IntelliSense support
+- **Hot Reload:** Automatic page updates during development
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Contributing
 
-## Learn More
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-To learn more about Next.js, take a look at the following resources:
+## License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Acknowledgments
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Next.js](https://nextjs.org/) - The React Framework for Production
+- [MongoDB](https://www.mongodb.com/) - The database for modern applications
+- [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework
