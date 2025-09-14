@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verify Your Email</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .header {
+        text-align: center;
+        padding-bottom: 20px;
+      }
+      h2 {
+        color: #333;
+        margin-bottom: 20px;
+      }
+      p {
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 15px;
+      }
+      .button {
+        display: inline-block;
+        padding: 12px 24px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin: 15px 0;
+        font-weight: bold;
+      }
+      .link {
+        color: #666;
+        word-break: break-all;
+      }
+      .footer {
+        margin-top: 30px;
+        font-size: 12px;
+        color: #999;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h2>Verify Your Email Address</h2>
+      </div>
+      <p>
+        Thank you for signing up! Please verify your email address by clicking
+        the button below:
+      </p>
+      <div style="text-align: center">
+        <a
+          href="${process.env.DOMAIN}/verifyemail?token=${hashedToken}"
+          class="button"
+        >
+          Verify Email
+        </a>
+      </div>
+      <p>Or copy and paste this link in your browser:</p>
+      <p class="link">${process.env.DOMAIN}/verifyemail?token=${hashedToken}</p>
+      <div class="footer">
+        <p>
+          If you didn't create an account, you can safely ignore this email.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
