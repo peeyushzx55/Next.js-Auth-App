@@ -4,25 +4,26 @@ import bcryptjs from "bcryptjs";
 import fs from "fs/promises";
 import path from "path";
 
-export const sendEmail = async ({ email, emailType, userId }: any) => {
-  try {
-    const hashedToken = await bcryptjs.hash(userId.toString(), 10);
-    if (emailType === "VERIFY") {
-      await User.findByIdAndUpdate(userId, {
-        $set: {
-          verifyToken: hashedToken,
-          verifyTokenExpiry: Date.now() + 3600000,
-        },
-      });
-    } else if (emailType === "RESET") {
-      await User.findByIdAndUpdate(userId, {
-        $set: {
-          forgotPasswordToken: hashedToken,
-          forgotPasswordTokenExpiry: Date.now() + 3600000,
-        },
-      });
-    }
+interface SendVerificationEmailParams {
+  email: string;
+  userId: string;
+}
 
+export const sendVerificationEmail = async ({
+  email,
+  userId,
+}: SendVerificationEmailParams) => {
+  try {
+    // Generate verification token
+    const hashedToken = await bcryptjs.hash(userId.toString(), 10);
+
+    // Update user with verification token
+    await User.findByIdAndUpdate(userId, {
+      verifyToken: hashedToken,
+      verifyTokenExpiry: Date.now() + 3600000, // Token expires in 1 hour
+    });
+
+    // Create email transport
     const transport = nodemailer.createTransport({
       host: process.env.NODEMAILER_HOST,
       port: 2525,
@@ -32,26 +33,27 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
       },
     });
 
+    // Read email template
     const templatePath = path.join(
       process.cwd(),
       "src",
       "templates",
-      emailType === "VERIFY" ? "verifyEmail.html" : "resetPassword.html"
+      "verifyEmail.html"
     );
-
     let htmlContent = await fs.readFile(templatePath, "utf-8");
 
+    // Replace template variables
     htmlContent = htmlContent.replace(
       /\${process\.env\.DOMAIN}/g,
       process.env.DOMAIN || ""
     );
     htmlContent = htmlContent.replace(/\${hashedToken}/g, hashedToken);
 
+    // Send verification email
     const mailOptions = {
       from: "test@email.com",
       to: email,
-      subject:
-        emailType === "VERIFY" ? "Verify your email" : "Reset your password",
+      subject: "Verify your email",
       html: htmlContent,
     };
 
